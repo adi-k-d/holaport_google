@@ -3,9 +3,15 @@ import { useScript } from "../hooks/useScript"
 import { collection, addDoc, setDoc, doc } from "firebase/firestore"
 import jwt_deocde from "jwt-decode"
 import { db } from "../firebase"
+import { AuthContext } from "../context/AuthContext"
+import { useContext } from "react"
+import { Navigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
-function Login({ user, setUser }) {
+function Login() {
   const googlebuttonref = useRef()
+  const navigate = useNavigate()
+  const { user, setUser } = useContext(AuthContext)
 
   const onGoogleSignIn = async (user) => {
     let userCred = user.credential
@@ -17,8 +23,7 @@ function Login({ user, setUser }) {
       photoURL: payload.picture,
     })
     setUser(payload)
-
-    console.log(user)
+    navigate("/")
   }
   useScript("https://accounts.google.com/gsi/client", () => {
     window.google.accounts.id.initialize({
