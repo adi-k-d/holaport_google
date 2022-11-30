@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react"
 import { useScript } from "../hooks/useScript"
 import { collection, addDoc, setDoc, doc } from "firebase/firestore"
 import jwt_deocde from "jwt-decode"
+import { FaSignInAlt } from "react-icons/fa"
 import { db } from "../firebase"
 import { AuthContext } from "../context/AuthContext"
 import { useContext } from "react"
@@ -37,7 +38,25 @@ function Login() {
       size: "medium",
     })
   })
-  return <div ref={googlebuttonref}></div>
+  return (
+    <>
+      <section className="heading">
+        <h1>
+          <FaSignInAlt /> Login
+        </h1>
+        <p>Login and start uploading Posts</p>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "100vh",
+          }}
+          ref={googlebuttonref}
+        ></div>
+      </section>
+    </>
+  )
 }
 
 export default Login
